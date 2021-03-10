@@ -1,5 +1,121 @@
-@col: #21242b;
+/*! Interpolation #2 */
+@russia-city-odintsovo: Odincovo;
+@english-city-odintsovo: 'Odintsovo';
+@russia-hello: "Привет, @{russia-city-odintsovo}!";
+@english-hello: "Hello, @{english-city-odintsovo}!";
 
-h1 {
-  color: @col;
+.hello-russia {
+  content: @russia-hello;
+}
+.hello-english {
+  content: @english-hello;
+}
+
+/*! Playing around #2 */
+.a {
+  .b {
+    .c {
+      & ~ & {
+        color: red;
+      }
+    }
+  }
+}
+
+/*! Interpolation #2 */
+@icon-font-name: fontawesome-webfont;
+@icon-font-path:  "../fonts";
+
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('@{icon-font-path}/@{icon-font-name}.eot?v=4.3.0');
+  src: url('@{icon-font-path}/@{icon-font-name}.eot?#iefix&v=4.3.0') format('embedded-opentype')
+}
+
+/*! Interpolation #3 */
+@lang-prefix: site;
+@lang-russia: rus;
+@lang-english: eng;
+
+.@{lang-prefix}-@{lang-russia} {
+    content: "@{lang-russia}";
+}
+
+.@{lang-prefix}-@{lang-english} {
+    content: "@{lang-english}";
+}
+
+/*! Interpolation #4 */
+@margin-small: 40px;
+@padding-small: 20px;
+
+@size: small;
+
+.block {
+  @margin: "margin-@{size}";
+  @padding: "padding-@{size}";
+  margin: @@margin + @@padding;
+}
+/*! Interpolation #5 */
+/*! При вызове переменной с помощью конструкции @@ на её место подставляется значение переменной, имя которой указано в строке. */
+
+@col: red;
+.box {
+  @personal-col: "col";
+  color: @@personal-col;
+}
+
+/*! Mixins 1 */
+
+.bordered(@_cl) {
+  border-top: dotted 1px @_cl;
+  border-bottom: solid 2px @_cl;
+}
+.article {
+  .bordered(#333);
+  color: #443d3d;
+}
+
+/*! Mixins 2 */
+.clearfix() {
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+.navbar {
+  .clearfix();
+}
+
+/*! Mixins 3 - params by def */
+
+.mix(@_col: #aaa) {
+  border-top: dotted 1px @_col;
+  border-bottom: solid 2px @_col;
+}
+
+.footer {
+  .mix();
+}
+
+/*! Mixins 4 - params by def 2 */
+.transition(@function: ease, @duration: .3s, @property: all) {
+  transition-timing-function: @function;
+  transition-duration: @duration;
+  transition-property: @property;
+}
+
+.block {
+  .transition(linear);
+}
+
+.link {
+  .transition(linear, .5s);
 }
