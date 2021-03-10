@@ -1,5 +1,93 @@
-@col: #21242b;
+@import (css) "./outer/_mail.css";
+@import (reference) "./outer/_goog.less";
+@import (optional) "./outer/_non-existent";
 
-h1 {
-  color: @col;
+/*! Комментарий, который будет всегда сохраняться */
+.global-header {
+  background-color: #fff;
+
+  .area {
+    text-align: center;
+  }
+}
+
+.global-header:hover {
+  background-color: #000;
+}
+
+.global-footer {
+  &:extend(.global-header all);
+}
+
+
+
+
+
+
+/*! Комментарий, который будет всегда сохраняться */
+.main {
+  color: red;
+  text-align: center;
+}
+
+.cont {
+  border: 1px;
+}
+
+.a {
+  &:extend(.main, .cont);
+  text-decoration: line-through;
+  &.b {
+    display: flex;
+  }
+}
+
+/*! Комментарий, который будет всегда сохраняться */
+.class {
+  .two {
+    @media (min-width: 992px) {
+      display: none;
+      // какие-то другие стили
+    }
+  }
+}
+
+/*! Комментарий, который будет всегда сохраняться */
+
+
+@media screen {
+  .one {
+    background-color: #fff;
+  }
+
+  @media (min-width: 992px) {
+    .two {
+      color: #777;
+    }
+  }
+}
+
+.test {
+  &:extend(.one, .two);
+  border-right: 1px solid #000;
+}
+/*! Комментарий, который будет всегда сохраняться */
+/*! Комментарий, который будет всегда сохраняться */
+/*! Комментарий, который будет всегда сохраняться */
+/*! Комментарий, который будет всегда сохраняться */
+/*! Комментарий, который будет всегда сохраняться */
+/*! Комментарий, который будет всегда сохраняться */
+/*! Комментарий, который будет всегда сохраняться */
+
+
+.box-a {
+  display: inline;
+  border: none;
+  color: red;
+  text-align: center;
+}
+
+.asta {
+  &:extend(.box-a);
+  overflow: auto;
 }
