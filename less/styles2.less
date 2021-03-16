@@ -1,0 +1,46 @@
+/*! Properties' concatenation */
+
+/*! Example 1*/
+.depth-top() {
+  box-shadow+: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
+}
+
+.depth-bottom() {
+  box-shadow+: 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.class1 {
+  .depth-top();
+  .depth-bottom();
+}
+
+/*! Example 2*/
+.scale(@scale) {
+  transform+_: scale(@scale);
+}
+
+.rotate(@angle) {
+  transform+_: rotate(@angle);
+}
+
+.translate(@px) {
+  transform+_: translateX(@px);
+}
+
+.block {
+  .scale(1.75);
+  .rotate(45deg);
+  .translate(10px);
+}
+/*! ----------------------------------------------------------------------- */
+/*! Lists */
+@list: "Основы", "Работа с селекторами, медиа-запросами и файлами", "Переменные и примеси", "Операции со свойствами и встроенные функции";
+
+.class2 {
+  @currentStatus: e(extract(@list, 4));
+  content: %("Текущая глава: %a", @currentStatus);
+}
+
+.class3 {
+  content: length(@list);
+}

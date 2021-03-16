@@ -65,7 +65,7 @@
   @personal-col: "col";
   color: @@personal-col;
 }
-
+/*! ------------------------------------------------------------------ */
 /*! Mixins 1 */
 
 .bordered(@_cl) {
@@ -118,4 +118,89 @@
 
 .link {
   .transition(linear, .5s);
+}
+/*! ------------------------------------------------------------------ */
+/*! @arguments */
+
+.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #333) {
+  -webkit-box-shadow: @arguments;
+     -moz-box-shadow: @arguments;
+          box-shadow: @arguments;
+}
+
+.big-block {
+  .box-shadow(2px, 5px);
+}
+
+/*! @rest */
+
+.mixin(@width: 152px, @height: 20px, @rest...)  {
+  width: @width;
+  height: @height;
+  border: @rest;
+}
+
+.asta {
+  .mixin(304px, 40px, 2px, solid, #ddd);
+}
+
+/*! ------------------------------------------------------------------ */
+/*! Convert pixels to em */
+
+.pxToEm(@value, @base: 16px) {
+  @calcEm: (@value / @base) + 0em;
+}
+
+.class1 {
+  .pxToEm(20px);
+  content: @calcEm;
+}
+
+/*! ------------------------------------------------------------------ */
+/*! !important keyword - adding one to all props of a mixin */
+
+.mixin2(@color: #333, @bg: #f5f5f5) {
+  color: @color;
+
+  .nested {
+    background-color: @bg;
+  }
+}
+
+.class2 {
+  .mixin2() !important;
+}
+
+
+/*! ------------------------------------------------------------------ */
+/*! Не используйте переменные с набором правил как примеси.
+Основная задача переменных с набором правил — передача свойств в примеси. Старайтесь использовать эту возможность именно так, и никак иначе. */
+/*! Rules set */
+
+/*! #1 example (dummy) */
+@element: {
+  color: #777;
+
+  &.active {
+    color: #000;
+  }
+};
+
+.item {
+  @element();
+}
+
+/*! #2 real example  */
+.screen(@min, @max, @ruleset) {
+  @media (min-width: @min) and (max-width: (@max - 1)) {
+    @ruleset();
+  }
+}
+
+.class3 {
+  background-color: #000;
+
+  .screen(768px, 1200px, {
+    background-color: #fff;
+  });
 }
