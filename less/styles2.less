@@ -44,3 +44,25 @@
 .class3 {
   content: length(@list);
 }
+/*! ------------------------------------------------------------------
+unit(10px)  // 10
+unit(10rem) // 10
+unit(10cm)  // 10
+
+// Такой единицы нет в CSS
+unit(10apple) // 10
+*/
+/*! ------------------------ Work with colors------------------------------------------ */
+
+.class3 {
+  color: rgb(111, 222, 333);
+  color: hsv(60, 100%, 50%);
+  color: hsl(60, 100%, 50%);
+  color: hsla(60, 100%, 50%, .5);
+  color: lighten(hsl(80, 90%, 20%), 10%);
+  color: darken(hsl(80, 90%, 20%), 10%);
+  color: darken(#fff, 10%);
+  color: mix(rgba(255, 255, 255, 1), rgba(255, 255, 255, .5), 50%);
+  color: mix(#fff, #bbb, 60%);
+  color: contrast(#000);
+}
